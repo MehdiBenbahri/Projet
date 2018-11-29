@@ -1,4 +1,13 @@
 <?php
+require 'view/header.php';
+require 'controller/rapport.php';
+session_start();
+//On en profite pour afficher les rapport si il y'en a !
+
+$_SESSION['rapport']->getAllRapport();
+$_SESSION['rapport'] = $error = new rapport();
+
+
 /*
  * Routeur du forum
  * On regarde si dans l'url,le premier attribut après le nom de domaine est
@@ -7,7 +16,7 @@
  * Dev : Mehdi Ben Bahri
  */
 
-$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=');
+$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=','signIn','signUp','control_validCo');
 $actual_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_url = explode("/", $actual_url);
 
@@ -21,25 +30,39 @@ for ($i = 0; $i < count($actual_url); $i++) {
     }
 }
 
-//On require dans tout les cas le header...
-
-require 'view/header.php';
 
 //Si premier Attribut est dans l'url :
-echo "$premierAtribut";
 if (in_array($premierAtribut, $accueilurl)) {
+
+    /*On regarde si il ne demande pas un controlleur */
+
     if ($premierAtribut === ""){
         //si il y a rien on ramène à la page d'accueil.
         require "view/accueil.php";
     }
+    else if(strlen($premierAtribut)>7){
+        /*Vérification pour les controller*/
+        if (substr($premierAtribut,0,7) === "control"){
+
+            //c'est un controlleur
+            require "controller/". $premierAtribut .".php";
+
+        }
+        else{
+
+            require 'view/page404.php';
+        }
+    }
     else{
         require "view/".$premierAtribut.'.php';
     }
+    /*Si il fait plus de 7 caractères,c'est peu être un controller.)*/
+
+
 
 } else {
 
-    //erreur 404
-    echo "404";
+    require 'view/page404.php';
 }
 
 //On require dans tout les cas le footer...
