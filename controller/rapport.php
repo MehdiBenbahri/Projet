@@ -1,10 +1,5 @@
 <?php
 /**
- * Cette classe ne doit être déclaré qu'une fois par type de rapport
- * Par exemple :
- * Une initialisation pour les erreur
- * Une initialisation pour les avertissements
- * Une initialisation pour les messages simple.
  *
  * Class de gestion qui permet de crée plusieurs rapport
  * pour l'utilisateur,par exemple une erreur.
@@ -96,7 +91,7 @@ class rapport
      *
      */
     public function nbRapport(){
-
+        return count($this->message);
     }
 
 }
