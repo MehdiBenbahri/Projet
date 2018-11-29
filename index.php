@@ -7,7 +7,7 @@
  * Dev : Mehdi Ben Bahri
  */
 
-$accueilurl = array('accueil', 'profil', 'contact', 'mentions-legal','topic=');
+$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=');
 $actual_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_url = explode("/", $actual_url);
 
@@ -26,10 +26,18 @@ for ($i = 0; $i < count($actual_url); $i++) {
 require 'view/header.php';
 
 //Si premier Attribut est dans l'url :
-
+echo "$premierAtribut";
 if (in_array($premierAtribut, $accueilurl)) {
-    require "view/".$premierAtribut.'.php';
+    if ($premierAtribut === ""){
+        //si il y a rien on ramène à la page d'accueil.
+        require "view/accueil.php";
+    }
+    else{
+        require "view/".$premierAtribut.'.php';
+    }
+
 } else {
+
     //erreur 404
     echo "404";
 }
