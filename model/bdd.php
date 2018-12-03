@@ -82,12 +82,13 @@ class connectDB
     {
         try {
             echo "ajajaj";
-            $this->pdo->exec('update starfaaaaaaaaaa where izkz;');
-            var_dump($this->pdo);
+            $this->pdo->exec("INSERT INTO user(username, rank, email, password) VALUES ('$nom','0','$email','$pass')");
 
+            return 0;
         } catch (PDOException $e) {
 
-            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return 1;
         }
     }
 

@@ -1,5 +1,5 @@
 <?php
-require 'model/bdd.php';
+
 
 echo "accueil<br><a href='signIn'>Connection</a>";
 

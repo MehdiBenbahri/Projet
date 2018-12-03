@@ -11,14 +11,18 @@ if ($pass !== $pass2){
     $_SESSION['rapport']->createRapport("Les mots de passe doivent être identique !","rgba(188, 28, 0,0.5)","Erreur : ","rgb(128, 0, 0)");
     $fail = 1;
 }
+if($fail === 0){
+    $fail = $bdd->createUser($email,$pass,$pseudo);
+}
 
-$bdd->createUser($email,$pass,$pseudo);
+
 
 if ($fail === 0){
-    //header('Location: profil');
-    //exit();
+    $_SESSION['rapport']->createRapport("Bienvenue sur le Forum !","rgb(45, 132, 59)","Bienvenue : ","rgb(93, 216, 113");
+    header('Location: profil');
+    exit();
 }
 else{
-    //header('Location: signUp');
-    //exit();
+    header('Location: signUp');
+    exit();
 }
