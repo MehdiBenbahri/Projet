@@ -36,8 +36,8 @@ if ($emailBdd === $_POST["email"]){
 }
 else{
     $_SESSION['rapport']->createRapport("Email incorrect !","rgba(188, 28, 0,0.5)","Erreur : ","rgb(128, 0, 0)");
-    //header('Location: signIn');
-    //exit();
+    header('Location: signIn');
+    exit();
 }
 
 

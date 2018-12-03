@@ -12,6 +12,15 @@ if ($pass !== $pass2){
     $fail = 1;
 }
 if($fail === 0){
+    if($bdd->UserAlreadyExiste($pseudo )===false){
+        $fail = 0;
+    }
+    else{
+        $_SESSION['rapport']->createRapport("Le nom d'utilisateur existe déjà !","rgba(188, 28, 0,0.5)","Erreur : ","rgb(128, 0, 0)");
+        $fail = 1;
+    }
+}
+if($fail === 0){
     $fail = $bdd->createUser($email,$pass,$pseudo);
 }
 

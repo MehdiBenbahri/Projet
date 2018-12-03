@@ -78,10 +78,16 @@ class connectDB
      * \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
      */
 
+    /*
+     * Crée un utilisateur avec les paramètres données
+     *
+     *
+     *
+     */
     public function createUser($email,$pass,$nom)
     {
         try {
-            echo "ajajaj";
+
             $this->pdo->exec("INSERT INTO user(username, rank, email, password) VALUES ('$nom','0','$email','$pass')");
 
             return 0;
@@ -89,6 +95,31 @@ class connectDB
 
             $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
             return 1;
+        }
+    }
+    /*
+     * True si l'utilisateur existe déjà dans la base de donnée
+     * False si il existe pas.
+     *
+     */
+    public function UserAlreadyExiste($user){
+        try{
+            $req = $this->pdo->prepare("Select username from user where username = :user");
+            $req->bindParam(":user",$user);
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            if(count($fetch)>0){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        }
+        catch(PDOException $e){
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return true;
         }
     }
 
