@@ -1,12 +1,17 @@
 <?php
 require 'view/header.php';
 require 'controller/rapport.php';
+require 'model/bdd.php';
 session_start();
 //On en profite pour afficher les rapport si il y'en a !
 
-$_SESSION['rapport']->getAllRapport();
-$_SESSION['rapport'] = $error = new rapport();
+if(isset($_SESSION['rapport'])){
+    $_SESSION['rapport']->getAllRapport();
 
+}
+
+$_SESSION['rapport'] = $error = new rapport();
+$bdd = new connectDB("localhost","root","bdd_projet","");
 
 /*
  * Routeur du forum
@@ -16,7 +21,7 @@ $_SESSION['rapport'] = $error = new rapport();
  * Dev : Mehdi Ben Bahri
  */
 
-$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=','signIn','signUp','control_validCo');
+$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=','signIn','signUp','control_validCo','control_validIns');
 $actual_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_url = explode("/", $actual_url);
 

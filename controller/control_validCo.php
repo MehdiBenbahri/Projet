@@ -4,8 +4,6 @@
 
 
 
-echo "email : " . $_POST["email"] . "<br>";
-echo "password : " . $_POST["pass"] . "<br>";
 
 
 
@@ -16,12 +14,13 @@ echo "password : " . $_POST["pass"] . "<br>";
  * En attendant je mets le mdp en dur :
  *
  */
+
 $emailBdd = "email@email.fr";
 $passBdd = "12345"; //meilleur mdp !
 
 if ($emailBdd === $_POST["email"]){
     if($passBdd === $_POST["pass"]){
-        $_SESSION['rapport']->createRapport("Content de vous revoir !","rgb(46, 184, 46)","Bienvenue : ","rgb(0, 102, 34)");
+        $_SESSION['rapport']->createRapport("Content de vous revoir !","rgb(45, 132, 59)","Bienvenue : ","rgb(93, 216, 113");
         //on connect et on redirige vers le profil :
         //TO DO : La variable de session
 
@@ -37,8 +36,8 @@ if ($emailBdd === $_POST["email"]){
 }
 else{
     $_SESSION['rapport']->createRapport("Email incorrect !","rgba(188, 28, 0,0.5)","Erreur : ","rgb(128, 0, 0)");
-    header('Location: signIn');
-    exit();
+    //header('Location: signIn');
+    //exit();
 }
 
 

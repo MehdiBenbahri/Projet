@@ -38,7 +38,8 @@ class connectDB
     /* Retourne l'objet PDO déjà initialisé
     *  Dev : Mehdi Ben Bahri
     */
-    function bdd(){
+    function bdd()
+    {
         return $this->pdo;
     }
 
@@ -62,7 +63,7 @@ class connectDB
     }
 
     /**
-     * permet de savoir le nom de la base de donnée sur laqu'elle on travail
+     * permet de savoir le nom de la base de donnée sur la qu'elle on travail
      * @return mixed
      */
     public function getDbName()
@@ -76,6 +77,19 @@ class connectDB
      * il faut faire des fonctions pour les opérations redondante.
      * \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
      */
+
+    public function createUser($email,$pass,$nom)
+    {
+        try {
+            echo "ajajaj";
+            $this->pdo->exec('update starfaaaaaaaaaa where izkz;');
+            var_dump($this->pdo);
+
+        } catch (PDOException $e) {
+
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+        }
+    }
 
 
 }
