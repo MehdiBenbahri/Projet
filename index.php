@@ -31,7 +31,7 @@ for ($i = 0; $i < count($actual_url); $i++) {
     if ($_SERVER['HTTP_HOST'] === $actual_url[$i]) {
         $premierAtribut = $actual_url[$i + 2];
         if (empty($premierAtribut)){
-            $premierAtribut = $actual_url[$i + 1];
+            $premierAtribut = "";
         }
         //ça sert à rien de continuer la boucle
         $i = count($actual_url); //arrêt de la boucle forcé
