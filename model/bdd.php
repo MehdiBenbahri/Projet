@@ -142,6 +142,41 @@ class connectDB
             return true;
         }
     }
+    public function connectInfoIsCorrect($mail,$pass){
+        try{
+            $req = $this->pdo->prepare("Select * from user where email = :mail and password = :pass");
+            $req->bindParam(":mail",$mail);
+            $req->bindParam(":pass", $pass);
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            if(count($fetch)>0){
+                return true;
+            }
+            else{
+                return false;
+            }
 
+        }
+        catch(PDOException $e){
+            $_SESSION['rapport']->createRapport("Erreur lors de la vérification des informations - merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return true;
+        }
+    }
+    public function getAllUser(){
+        try{
+            $req = $this->pdo->prepare("Select * from user");
+
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            return $fetch;
+
+        }
+        catch(PDOException $e){
+            $_SESSION['rapport']->createRapport("Erreur lors de la récupération des données - merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return true;
+        }
+    }
 
 }

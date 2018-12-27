@@ -3,11 +3,14 @@
 
 echo "accueil<br><a href='signIn'>Connection</a><br><a href='signUp'>S'inscrire</a>";
 
-//Exemple d'utilisation de la classe en local :
-//$bdd = new connectDB("localhost", "root", "bdd_projet", "");
-
-
-
-
-
 ?>
+
+<div class="container">
+    <div class="row">
+        <div class="col">forum 1 </div>
+        <div class="col">forum 2 </div>
+        <div class="w-100"></div>
+        <div class="col">dernière réponse 1 </div>
+        <div class="col">dernière réponse 1 </div>
+    </div>
+</div>
