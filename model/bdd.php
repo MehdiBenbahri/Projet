@@ -118,7 +118,27 @@ class connectDB
 
         }
         catch(PDOException $e){
-            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            $_SESSION['rapport']->createRapport("Erreur lors de la vérification du nom d'utilisateur - merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return true;
+        }
+    }
+    public function EmailAlreadyExiste($mail){
+        try{
+            $req = $this->pdo->prepare("Select email from user where email = :mail");
+            $req->bindParam(":mail",$mail);
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            if(count($fetch)>0){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        }
+        catch(PDOException $e){
+            $_SESSION['rapport']->createRapport("Erreur lors de la vérification de l'email - merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
             return true;
         }
     }
