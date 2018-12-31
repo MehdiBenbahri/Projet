@@ -1,16 +1,12 @@
 <?php
 
+if (isset($_SESSION['co'])){
+    echo "<a href='control_deco'>Déconnexion</a><br><a href='profil'>Profil</a>";
+}
+else{
+    echo "accueil<br><a href='signIn'>Connexion</a><br><a href='signUp'>S'inscrire</a>";
+}
 
-echo "accueil<br><a href='signIn'>Connection</a><br><a href='signUp'>S'inscrire</a>";
 
 ?>
 
-<div class="container">
-    <div class="row">
-        <div class="col">forum 1 </div>
-        <div class="col">forum 2 </div>
-        <div class="w-100"></div>
-        <div class="col">dernière réponse 1 </div>
-        <div class="col">dernière réponse 1 </div>
-    </div>
-</div>

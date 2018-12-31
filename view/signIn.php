@@ -6,11 +6,11 @@
 
         <form class="form-signin formSign" method="post" action="control_validCo">
             <br>
-            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Adresse Email" required autofocus>
+            <input type="text" name="nom" id="inputEmail" class="form-control" placeholder="Pseudo" required autofocus>
             <br>
             <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Mot de passe " required>
             <br>
-            <button class="btn btnBase btn-danger btn-sm btn-signin" type="submit">Connection</button>
+            <button class="btn btnBase btn-danger btn-sm btn-signin" type="submit">Connexion</button>
         </form>
         <br>
         <a href="contact" class="forgotPass">

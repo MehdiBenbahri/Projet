@@ -35,6 +35,8 @@ if($fail === 0){
 
 if ($fail === 0){
     $_SESSION['rapport']->createRapport("Bienvenue sur le Forum !","rgb(45, 132, 59)","Bienvenue : ","rgb(93, 216, 113");
+    $_SESSION['co'] = $pseudo;
+
     header('Location: profil');
     exit();
 }

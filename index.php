@@ -3,6 +3,7 @@ require 'view/header.php';
 require 'controller/rapport.php';
 require 'model/bdd.php';
 session_start();
+
 //On en profite pour afficher les rapport si il y'en a !
 
 if(isset($_SESSION['rapport'])){
@@ -21,7 +22,7 @@ $bdd = new connectDB("localhost","root","bdd_projet","");
  * Dev : Mehdi Ben Bahri
  */
 
-$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=','signIn','signUp','control_validCo','control_validIns');
+$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=','signIn','signUp','control_validCo','control_validIns','control_deco');
 $actual_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_url = explode("/", $actual_url);
 

@@ -142,10 +142,10 @@ class connectDB
             return true;
         }
     }
-    public function connectInfoIsCorrect($mail,$pass){
+    public function connectInfoIsCorrect($nom,$pass){
         try{
-            $req = $this->pdo->prepare("Select * from user where email = :mail and password = :pass");
-            $req->bindParam(":mail",$mail);
+            $req = $this->pdo->prepare("Select * from user where username = :mail and password = :pass");
+            $req->bindParam(":mail",$nom);
             $req->bindParam(":pass", $pass);
             $req->execute();
             $this->pdo->errorInfo();
@@ -178,5 +178,6 @@ class connectDB
             return true;
         }
     }
+
 
 }

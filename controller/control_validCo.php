@@ -13,16 +13,16 @@
  * Connection à la base de donnée et vérification du mots de passe
  *
  */
-$email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+$pseudo = filter_var($_POST["nom"], FILTER_SANITIZE_STRING);
 $pass = filter_var($_POST["pass"], FILTER_SANITIZE_STRING);
-$verif = $bdd->connectInfoIsCorrect($email,$pass);
+$verif = $bdd->connectInfoIsCorrect($pseudo,$pass);
 
-var_dump($verif);
+
 
 if($verif === true){
     $_SESSION['rapport']->createRapport("Content de vous revoir !","rgb(45, 132, 59)","Bienvenue : ","rgb(93, 216, 113");
     //on connect et on redirige vers le profil :
-    //TO DO : La variable de session
+    $_SESSION['co'] = $pseudo;
 
     header('Location: profil');
     exit();
