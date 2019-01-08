@@ -47,6 +47,7 @@ if (in_array($premierAtribut, $accueilurl)) {
 
     if ($premierAtribut === ""){
         //si il y a rien on ramène à la page d'accueil.
+        require "controller/control_listeForum.php";
         require "view/accueil.php";
     }
     else if(strlen($premierAtribut)>7){
@@ -63,6 +64,9 @@ if (in_array($premierAtribut, $accueilurl)) {
         }
     }
     else{
+        if ($premierAtribut === "accueil"){
+            require "controller/control_listeForum.php";
+        }
         require "view/".$premierAtribut.'.php';
     }
     /*Si il fait plus de 7 caractères,c'est peu être un controller.)*/

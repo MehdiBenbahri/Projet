@@ -1,0 +1,6 @@
+<?php
+
+$forums = $bdd->getAllForum();
+
+
+?>

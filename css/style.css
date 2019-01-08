@@ -47,3 +47,16 @@
     margin-top : 15px !important;
     border-radius:0px !important;
 }
+.titre{
+    width: 100px;
+}
+.auteur{
+    width: 20%;
+}
+.date{
+    width: 20%;
+}
+.pseudoAdmin{
+    color : red;
+    ;
+}

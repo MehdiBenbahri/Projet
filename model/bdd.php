@@ -178,6 +178,21 @@ class connectDB
             return true;
         }
     }
+    public function getAllForum(){
+        try{
+            $req = $this->pdo->prepare("SELECT nom,username,rank,topic.id,message,id_user,id_topic,date FROM user,topic inner join reponse on topic.id = id_topic where user.id = id_user");
+
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            return $fetch;
+
+        }
+        catch(PDOException $e){
+            $_SESSION['rapport']->createRapport("Erreur lors de la récupération des données - merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return true;
+        }
+    }
 
 
 }
