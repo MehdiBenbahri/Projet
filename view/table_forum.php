@@ -1,4 +1,4 @@
-<table class="table table-sm table-bordered">
+<table id="listeSujet" class="table table-sm table-bordered">
     <thead>
     <tr>
         <th scope="col" class="titre">Titre : </th>
