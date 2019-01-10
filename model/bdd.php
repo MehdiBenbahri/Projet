@@ -142,6 +142,21 @@ class connectDB
             return true;
         }
     }
+    public function getTopicInfoById($id){
+        try{
+            $req = $this->pdo->prepare("SELECT user.id,message,id_user,id_topic,date,username FROM reponse inner JOIN user on user.id = id_user where id_topic = :id");
+            $req->bindParam(":id",$id);
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            return $fetch;
+
+        }
+        catch(PDOException $e){
+            $_SESSION['rapport']->createRapport("Erreur lors de la vérification de l'email - merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return true;
+        }
+    }
     public function connectInfoIsCorrect($nom,$pass){
         try{
             $req = $this->pdo->prepare("Select * from user where username = :mail and password = :pass");
@@ -163,6 +178,7 @@ class connectDB
             return true;
         }
     }
+
     public function getAllUser(){
         try{
             $req = $this->pdo->prepare("Select * from user");
@@ -180,7 +196,7 @@ class connectDB
     }
     public function getAllForum(){
         try{
-            $req = $this->pdo->prepare("SELECT nom,username,rank,topic.id,message,id_user,id_topic,date FROM user,topic inner join reponse on topic.id = id_topic where user.id = id_user");
+            $req = $this->pdo->prepare("SELECT DISTINCT nom,topic.id,message,date,username,id_user from topic inner join reponse on topic.id = id_topic inner join user on id_user = user.id group by (topic.id)");
 
             $req->execute();
             $this->pdo->errorInfo();

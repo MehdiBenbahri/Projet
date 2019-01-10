@@ -22,7 +22,7 @@ $bdd = new connectDB("localhost","root","bdd_projet","");
  * Dev : Mehdi Ben Bahri
  */
 
-$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','topic=','signIn','signUp','control_validCo','control_validIns','control_deco');
+$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','signIn','signUp','control_validCo','control_validIns','control_deco');
 $actual_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_url = explode("/", $actual_url);
 
@@ -59,7 +59,7 @@ if (in_array($premierAtribut, $accueilurl)) {
 
         }
         else{
-
+            echo $premierAtribut;
             require 'view/page404.php';
         }
     }
@@ -73,9 +73,19 @@ if (in_array($premierAtribut, $accueilurl)) {
 
 
 
-} else {
+}else {
+    if (substr($premierAtribut,0,-1) == "topic?=" || substr($premierAtribut,0,-2) == "topic?=" || substr($premierAtribut,0,-3) == "topic?=" || substr($premierAtribut,0,-4) == "topic?=" || substr($premierAtribut,0,-5) == "topic?="){
+        $topicId = substr($premierAtribut,-1);
+        require "controller/control_listTopic.php";
 
-    require 'view/page404.php';
+
+    }
+    else{
+        //si il y a rien on ramène à la page d'accueil.
+        require 'view/page404.php';
+    }
+
+
 }
 
 //On require dans tout les cas le footer...
