@@ -1,11 +1,14 @@
-<?php
-if (isset($_SESSION['co'])){
-    echo "<a href='control_deco'>Déconnexion</a><br><a href='profil'>Profil</a>";
-}
-else{
-    echo "accueil<br><a href='signIn'>Connexion</a><br><a href='signUp'>S'inscrire</a>";
-}
-require "view/table_forum.php";
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="col-12">
+            <?php
+            require "view/table_forum.php";
+            ?>
 
-?>
-
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+</div>

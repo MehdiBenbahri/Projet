@@ -39,7 +39,7 @@ for ($i = 0; $i < count($actual_url); $i++) {
     }
 }
 
-
+require "view/navBar.php";
 //Si premier Attribut est dans l'url :
 if (in_array($premierAtribut, $accueilurl)) {
 
@@ -74,7 +74,8 @@ if (in_array($premierAtribut, $accueilurl)) {
 
 
 }else {
-    if (substr($premierAtribut,0,-1) == "topic?=" || substr($premierAtribut,0,-2) == "topic?=" || substr($premierAtribut,0,-3) == "topic?=" || substr($premierAtribut,0,-4) == "topic?=" || substr($premierAtribut,0,-5) == "topic?="){
+    $topicId = (int) filter_var($premierAtribut, FILTER_SANITIZE_NUMBER_INT);
+    if (is_int($topicId)){
         $topicId = substr($premierAtribut,-1);
         require "controller/control_listTopic.php";
 

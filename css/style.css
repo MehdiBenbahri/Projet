@@ -1,5 +1,7 @@
 /* Css du site */
-
+body{
+    background-color : #fffbf5 !important;
+}
 /*Met la couleur en rouge #ff332e*/
 .rouge{
     color : #ff332e;
@@ -58,4 +60,12 @@
 }
 .pseudoAdmin{
     color : cornflowerblue;
+}
+.navbar{
+    box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+}
+.tableForum{
+    float: none;
+    margin: 0 auto;
+    max-width: 500px !important;
 }
