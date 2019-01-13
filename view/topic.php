@@ -9,6 +9,29 @@
                 <div class="card">
                     <h5 class="card-header"><?php echo $i['username']; ?>
                         <small><i><?php echo date("d/m/Y H:i:s", strtotime($i['date'])) ?></i></small>
+                        <?php
+                        if ($bdd->isAdmin($_SESSION['co'])) {
+                            ?>
+                            <form method="post" class="droite spacing" action="control_suppMsg">
+                                <button class="btn btn-danger" title="supprimer le message"><i class="fas fa-times"></i>
+                                </button>
+                                <input class="noShow" name="idPost" value="<?php echo $i['messageId']; ?>">
+                                <input class="noShow" name="idTopic" value="<?php echo $topicId; ?>">
+                            </form>
+
+                            <form method="post" class="droite spacing" action="control_suppUser">
+                                <button class="btn btn-warning" title="supprimer l'utilisateur"><i
+                                            class="fas fa-skull"></i></button>
+                                </button>
+                                <input class="noShow" name="idUser" value="<?php echo $i['id_user']; ?>">
+                                <input class="noShow" name="idTopic" value="<?php echo $topicId; ?>">
+                            </form>
+
+                            <?php
+                        }
+
+                        ?>
+
                     </h5>
 
                     <div class="card-body">

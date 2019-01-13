@@ -4,7 +4,8 @@
     <title>Forum</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="description" content="Le forum d'un étudiant en informatique">
+    <meta name="keywords" content="Forum,informatique">
     <link rel="icon" type="image/png" href="https://www.additioapp.com/wp-content/uploads/2017/04/cropped-favicon.png" />
     <link rel="stylesheet" type="text/css" href="css/style.css">
 

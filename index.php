@@ -22,7 +22,7 @@ $bdd = new connectDB("localhost","root","bdd_projet","");
  * Dev : Mehdi Ben Bahri
  */
 
-$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','signIn','signUp','control_validCo','control_validIns','control_deco','control_validTop','control_addRep');
+$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','signIn','signUp','control_validCo','control_validIns','control_deco','control_validTop','control_addRep','control_suppMsg','control_suppUser');
 $actual_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_url = explode("/", $actual_url);
 

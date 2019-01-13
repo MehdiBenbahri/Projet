@@ -144,7 +144,7 @@ class connectDB
     }
     public function getTopicInfoById($id){
         try{
-            $req = $this->pdo->prepare("SELECT user.id,message,id_user,id_topic,date,username FROM reponse inner JOIN user on user.id = id_user where id_topic = :id");
+            $req = $this->pdo->prepare("SELECT user.id,reponse.id as messageId,message,id_user,id_topic,date,username FROM reponse inner JOIN user on user.id = id_user where id_topic = :id ORDER BY date ASC");
             $req->bindParam(":id",$id);
             $req->execute();
             $this->pdo->errorInfo();
@@ -196,7 +196,7 @@ class connectDB
     }
     public function getAllForum(){
         try{
-            $req = $this->pdo->prepare("SELECT DISTINCT nom,topic.id,message,date,username,id_user from topic inner join reponse on topic.id = id_topic inner join user on id_user = user.id group by (topic.id)");
+            $req = $this->pdo->prepare("SELECT DISTINCT nom,topic.id,message,date,username,id_user from topic inner join reponse on topic.id = id_topic inner join user on id_user = user.id group by (topic.id) ORDER BY date");
 
             $req->execute();
             $this->pdo->errorInfo();
@@ -249,6 +249,52 @@ class connectDB
 
             header('Location: topic?=' . $idTopic);
             exit();
+        } catch (PDOException $e) {
+
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return 1;
+        }
+    }
+    public function isAdmin($pseudo)
+    {
+        try {
+
+            $req = $this->pdo->prepare("Select rank from user where username = '$pseudo'");
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            $rank = $fetch[0]['rank'];
+            if ($rank > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        } catch (PDOException $e) {
+
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return 1;
+        }
+    }
+    public function removePost($id)
+    {
+        try {
+            $this->pdo->exec("DELETE FROM `reponse` WHERE id = $id");
+
+            return 0;
+        } catch (PDOException $e) {
+
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return 1;
+        }
+    }
+    public function removeUser($id)
+    {
+        try {
+            $this->pdo->exec("DELETE FROM `user` WHERE id = $id");
+
+            return 0;
         } catch (PDOException $e) {
 
             $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");

@@ -83,6 +83,13 @@ body{
     right : 0;
     float: right;
 }
+.haut{
+    top : 0;
+    float : top;
+}
 .noShow{
     display : none;
+}
+.spacing{
+    margin : 2px;
 }
