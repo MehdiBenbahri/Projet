@@ -6,7 +6,7 @@ if (isset($_SESSION['co']) && $bdd->isAdmin($_SESSION['co'])) {
 
     header('Location: topic?=' . $idTopic);
 } else {
-    $_SESSION['rapport']->createRapport("Vous devez être connecté en tant que Administrateur !", "#f4ca41", "Erreur : ", "#f46842");
+
     header('Location: accueil');
     exit();
 }

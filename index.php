@@ -30,7 +30,9 @@ $premierAtribut;
 
 for ($i = 0; $i < count($actual_url); $i++) {
     if ($_SERVER['HTTP_HOST'] === $actual_url[$i]) {
-        $premierAtribut = $actual_url[$i + 2];
+        //A CHANGER AU CAS OU VOUS VOUDRIEZ LE METTRE AVEC UNE URL EN : "nomDeDomaine/forum/"
+        // $premierAtribut = $actual_url[$i+2];
+        $premierAtribut = $actual_url[$i+1];
         if (empty($premierAtribut)){
             $premierAtribut = "";
         }
