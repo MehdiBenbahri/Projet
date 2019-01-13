@@ -22,7 +22,7 @@ $bdd = new connectDB("localhost","root","bdd_projet","");
  * Dev : Mehdi Ben Bahri
  */
 
-$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','signIn','signUp','control_validCo','control_validIns','control_deco');
+$accueilurl = array('','accueil', 'profil', 'contact', 'mentions-legal','signIn','signUp','control_validCo','control_validIns','control_deco','control_validTop','control_addRep');
 $actual_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_url = explode("/", $actual_url);
 
@@ -40,11 +40,11 @@ for ($i = 0; $i < count($actual_url); $i++) {
 }
 
 require "view/navBar.php";
+
 //Si premier Attribut est dans l'url :
 if (in_array($premierAtribut, $accueilurl)) {
 
     /*On regarde si il ne demande pas un controlleur */
-
     if ($premierAtribut === ""){
         //si il y a rien on ramène à la page d'accueil.
         require "controller/control_listeForum.php";
@@ -53,13 +53,13 @@ if (in_array($premierAtribut, $accueilurl)) {
     else if(strlen($premierAtribut)>7){
         /*Vérification pour les controller*/
         if (substr($premierAtribut,0,7) === "control"){
-
             //c'est un controlleur
+
             require "controller/". $premierAtribut .".php";
 
         }
         else{
-            echo $premierAtribut;
+
             require 'view/page404.php';
         }
     }
@@ -76,12 +76,13 @@ if (in_array($premierAtribut, $accueilurl)) {
 }else {
     $topicId = (int) filter_var($premierAtribut, FILTER_SANITIZE_NUMBER_INT);
     if (is_int($topicId)){
-        $topicId = substr($premierAtribut,-1);
+
         require "controller/control_listTopic.php";
 
 
     }
     else{
+
         //si il y a rien on ramène à la page d'accueil.
         require 'view/page404.php';
     }

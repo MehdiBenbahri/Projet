@@ -1,13 +1,13 @@
 /* Css du site */
 body{
-    background-color : #fffbf5 !important;
+    background-color : #a42833 !important;
 }
 /*Met la couleur en rouge #ff332e*/
 .rouge{
-    color : #ff332e;
+    color : #dc3545;
 }
 .bgRouge{
-    background-color : #ff332e !important;
+    background-color : #dc3545 !important;
 
 }
 /*Centre l'élément*/
@@ -68,4 +68,21 @@ body{
     float: none;
     margin: 0 auto;
     max-width: 500px !important;
+    background-color : white !important;
+}
+.cote{
+    background-color: white !important;
+
+    padding-top : 20px;
+    padding-bottom: 20px;
+}
+.textareaForum{
+    height: 200px !important;
+}
+.droite{
+    right : 0;
+    float: right;
+}
+.noShow{
+    display : none;
 }

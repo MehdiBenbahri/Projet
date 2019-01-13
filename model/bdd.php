@@ -209,6 +209,52 @@ class connectDB
             return true;
         }
     }
+    /*
+    * Crée un topic et la réponse qui va avec
+    */
+    public function createTopic($titre,$reponse,$pseudo)
+    {
+        try {
+            $this->pdo->exec("INSERT INTO `topic`(`nom`) VALUES ('".$titre."')");
+            $req = $this->pdo->prepare("Select id from topic where nom = '$titre'");
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            $idTopic = $fetch[0]['id'];
+            $req = $this->pdo->prepare("Select id from user where username = '$pseudo'");
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            $idUser = $fetch[0]['id'];
+            $this->pdo->exec("INSERT INTO `reponse`(`message`, `id_user`, `id_topic`, `date`) VALUES ('$reponse','$idUser','$idTopic',date('Y-m-d H:i:s'))");
+
+            header('Location: topic?=' . $idTopic);
+            exit();
+        } catch (PDOException $e) {
+
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return 1;
+        }
+    }
+    public function repondTopic($msg,$idTopic,$pseudo)
+    {
+        try {
+
+            $req = $this->pdo->prepare("Select id from user where username = '$pseudo'");
+            $req->execute();
+            $this->pdo->errorInfo();
+            $fetch = $req->fetchAll();
+            $idUser = $fetch[0]['id'];
+            $this->pdo->exec("INSERT INTO `reponse`(`message`, `id_user`, `id_topic`, `date`) VALUES ('$msg','$idUser','$idTopic',date('Y-m-d H:i:s'))");
+
+            header('Location: topic?=' . $idTopic);
+            exit();
+        } catch (PDOException $e) {
+
+            $_SESSION['rapport']->createRapport("Merci de contacter un administrateur | message : <i>$e | $this->pdo->errorInfo()</i>  !","rgba(188, 28, 0,0.5)","Exeption : ","rgb(128, 0, 0)");
+            return 1;
+        }
+    }
 
 
 }
